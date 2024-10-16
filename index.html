@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AdventurAI</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #typed-text {
+            color: #333;
+            border-right: solid .15em orange;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .15em;
+            font-size: 4em;
+            z-index: 2;
+        }
+
+
+
+        form {
+            background: #fff;
+            padding: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 50px;
+            /* More rounded corners */
+            transition: all 0.3s ease 0s;
+            /* Smooth transition effect */
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translate(-50%, 20px);
+            /* Center the button */
+            box-shadow: 0 9px 30px rgba(0, 0, 0, 0.2);
+            /* Add a shadow for depth */
+        }
+
+        button:hover {
+            background-color: #45a049;
+            /* Darker green when hovered */
+            color: #fff;
+            /* White text when hovered */
+            transform: translate(-50%, 10px);
+            /* Move up when hovered */
+        }
+
+
+        /* Blinking cursor animation */
+        @keyframes blink {
+
+            0%,
+            50% {
+                opacity: 1;
+            }
+
+            51%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .blink::after {
+            content: '|';
+            /* The cursor */
+            animation: blink 1s step-end infinite;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            /* Start from below the page */
+            width: 50px;
+            /* Adjust as needed */
+            height: 50px;
+            /* Adjust as needed */
+            z-index: 1;
+            background-image: url('hotairballoon.png');
+            /* Replace with your image */
+            background-size: contain;
+            animation: rise 20s infinite linear;
+            /* Adjust timing as needed */
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+                /* Fully transparent at the start */
+            }
+
+            20% {
+                opacity: 1;
+                /* Fully visible after 20% of the animation */
+            }
+
+            80% {
+                opacity: 1;
+                /* Fully visible until 80% of the animation */
+            }
+
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+                /* Fully transparent at the end */
+            }
+        }
+
+        #balloon1 {
+            left: 10%;
+            animation-delay: 1s;
+            /* Delay the start of the animation */
+        }
+
+        #balloon2 {
+            left: 40%;
+            animation-delay: 6s;
+            /* Delay the start of the animation */
+        }
+
+        #balloon3 {
+            left: 60%;
+            animation-delay: 12s;
+            /* Delay the start of the animation */
+        }
+
+        #balloon4 {
+            left: 85%;
+            animation-delay: 9s;
+            /* Delay the start of the animation */
+        }
+
+        #balloon5 {
+            left: 90%;
+            animation-delay: 3s;
+            /* Delay the start of the animation */
+        }
+
+        #balloon6 {
+            left: 15%;
+            animation-delay: 15s;
+        }
+
+        .plane {
+            position: absolute;
+            top: 90%;
+            /* Adjust as needed */
+            width: 50px;
+            /* Adjust as needed */
+            height: 50px;
+            /* Adjust as needed */
+            z-index: 0;
+            background-image: url('plane.png');
+            /* Replace with your plane image */
+            background-size: contain;
+            opacity: 0;
+            /* Planes are initially hidden */
+            animation: fly 30s infinite linear, fadeIn 2s forwards;
+            /* Adjust timing as needed */
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateX(-120%) translateY(120%);
+                opacity: 0;
+                /* Planes are hidden at the start of the fly animation */
+            }
+
+            10% {
+                opacity: 1;
+                /* Planes become fully visible after 10% of the fly animation */
+            }
+
+            100% {
+                transform: translateX(100vw) translateY(-100vh);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        #plane1 {
+            top: 10%;
+            animation-delay: 2s;
+            /* Delay the start of the animation */
+        }
+
+        #plane2 {
+            top: 30%;
+            animation-delay: 5s;
+            /* Delay the start of the animation */
+        }
+
+        .plane2 {
+            position: absolute;
+            top: 90%;
+            /* Adjust as needed */
+            right: 0;
+            /* Adjust as needed */
+            width: 50px;
+            /* Adjust as needed */
+            height: 50px;
+            /* Adjust as needed */
+            z-index: 0;
+            background-image: url('plane2.png');
+            /* Replace with your plane image */
+            background-size: contain;
+            opacity: 0;
+            /* Planes are initially hidden */
+            animation: fly2 30s infinite linear, fadeIn 2s forwards;
+            /* Adjust timing as needed */
+        }
+
+        @keyframes fly2 {
+            0% {
+                transform: translateX(120%) translateY(120%);
+                opacity: 0;
+                /* Planes are hidden at the start of the fly animation */
+            }
+
+            10% {
+                opacity: 1;
+                /* Planes become fully visible after 10% of the fly animation */
+            }
+
+            100% {
+                transform: translateX(-100vw) translateY(-100vh);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        #plane3 {
+            top: 10%;
+            animation-delay: 2s;
+            /* Delay the start of the animation */
+        }
+
+        #plane4 {
+            top: 30%;
+            animation-delay: 5s;
+            /* Delay the start of the animation */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="balloon" id="balloon1"></div>
+    <div class="balloon" id="balloon2"></div>
+    <div class="balloon" id="balloon3"></div>
+    <div class="balloon" id="balloon4"></div>
+    <div class="balloon" id="balloon5"></div>
+    <div class="balloon" id="balloon6"></div>
+
+
+    <div class="plane" id="plane1"></div>
+    <div class="plane" id="plane2"></div>
+
+
+    <div class="plane2" id="plane3"></div>
+    <div class="plane2" id="plane4"></div>
+
+
+
+    <!-- ... -->
+    <div class="container">
+        <div id="typed-text"></div>
+        <!-- Your form here -->
+        <button onclick="location.href='question1.html'" type="button">Proceed</button>
+
+    </div>
+
+    <script>
+        const balloons = document.querySelectorAll('.balloon');
+
+        balloons.forEach(balloon => {
+            balloon.addEventListener('animationiteration', () => {
+                let newLeft;
+                do {
+                    newLeft = Math.random() * 100;
+                } while (isTooClose(newLeft, balloons));
+                balloon.style.left = newLeft + '%';
+            });
+        });
+
+        function isTooClose(newLeft, balloons) {
+            const minDistance = 10; // Minimum distance between balloons in percentage of screen width
+            return Array.from(balloons).some(balloon => Math.abs(newLeft - parseFloat(balloon.style.left)) < minDistance);
+        }
+
+        const planes = document.querySelectorAll('.plane');
+
+        planes.forEach(plane => {
+            plane.addEventListener('animationiteration', () => {
+                plane.style.top = Math.random() * 30 + '%'; /* Random position between 0% and 30% from the top */
+            });
+        });
+
+        const planes2 = document.querySelectorAll('.plane2');
+
+        planes2.forEach(plane => {
+            plane.addEventListener('animationiteration', () => {
+                plane.style.top = Math.random() * 30 + '%'; /* Random position between 0% and 30% from the top */
+            });
+        });
+
+        const text = 'AdventurAI';
+        let index = 0;
+
+        function type() {
+            if (index < text.length) {
+                document.getElementById('typed-text').textContent += text.charAt(index);
+                index++;
+                setTimeout(type, 200); // adjust typing speed here
+            } else {
+                document.getElementById('typed-text').style.borderRight = 'none'; // remove cursor after typing
+                document.getElementById('typed-text').classList.add('blink');
+
+            }
+        }
+
+
+
+        type(); // start typing
+    </script>
+</body>
+
+</html>

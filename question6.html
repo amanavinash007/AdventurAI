@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Question 6</title>
+    <style>
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body {
+            font-family: Trebuchet MS, sans-serif;
+            background: linear-gradient(-45deg, rgba(247, 115, 75, 0.686), rgba(195, 84, 223, 0.3), rgba(35,166,213,0.5), rgba(35, 213, 171, 0.5));
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 500px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: none;
+            color: #fff;
+            background-color: #5C6BC0;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0a31f3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h1>What sorts of things do you like? Options include:</h1>
+    <form id="questionForm">
+        <ul>
+            <li><input type="checkbox" name="answer" value="Animals"> Animals</li>
+            <li><input type="checkbox" name="answer" value="Architecture"> Architecture</li>
+            <li><input type="checkbox" name="answer" value="Art"> Art</li>
+            <li><input type="checkbox" name="answer" value="Beaches"> Beaches</li>
+            <li><input type="checkbox" name="answer" value="Cruises"> Cruises</li>
+            <li><input type="checkbox" name="answer" value="Family time"> Family time</li>
+            <li><input type="checkbox" name="answer" value="Fine arts"> Fine arts</li>
+            <li><input type="checkbox" name="answer" value="Mountains"> Mountains</li>
+            <li><input type="checkbox" name="answer" value="Museums"> Museums</li>
+            <li><input type="checkbox" name="answer" value="National Parks"> National Parks</li>
+            <li><input type="checkbox" name="answer" value="Parks"> Parks</li>
+            <li><input type="checkbox" name="answer" value="Resorts"> Resorts</li>
+            <li><input type="checkbox" name="answer" value="Shopping"> Shopping</li>
+            <li><input type="checkbox" name="answer" value="Shows"> Shows</li>
+            <li><input type="checkbox" name="answer" value="Sports"> Sports</li>
+            <li><input type="checkbox" name="answer" value="Visual Arts"> Visual Arts</li>
+            <li><input type="checkbox" name="answer" value="Water Sports"> Water Sports</li>
+        </ul>
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+
+    <script>
+        document.getElementById('questionForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // prevent the form from submitting normally
+            let answers = [];
+            let checkboxes = document.getElementsByName('answer');
+            for (let i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    answers.push(checkboxes[i].value);
+                }
+            }
+            localStorage.setItem('question6', answers.join(',')); // save the answers to local storage
+            window.location.href = 'question7.html'; // redirect to the next question
+        });
+    </script>
+</body>
+</html>
