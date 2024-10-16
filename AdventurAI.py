@@ -2,7 +2,7 @@
 import openai
 from dotenv import load_dotenv
 import os
-
+load_dotenv()
 
 def oneQuestionInputHelper(question, number):
    return input(str(number) + ") " + question + " >>> ")
