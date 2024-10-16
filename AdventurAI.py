@@ -1,5 +1,7 @@
 
 import openai
+from dotenv import load_dotenv
+import os
 
 
 def oneQuestionInputHelper(question, number):
@@ -57,7 +59,7 @@ def simulateQuestions():
 
 
 def accessGPT(prompt):
-   openai.api_key = 'sk-proj-fUhAsRom6yzQ1GIcEqhUT3BlbkFJS9EsFkQFaC6cdwRiWNyw'
+   openai.api_key = os.getenv('OPENAI_API_KEY')
    messages = [ {"role": "system", "content":
              """You are an intelligent assistant that is used for choices on places to visit for the purpose
                  of planning a trip itinerary. Possible prompts that you may get and be required to answer is places
