@@ -77,18 +77,17 @@
 <body>
     <div class="container">
     <h1>Enter your dietary preferences.</h1>
-    <form id="questionForm">
-        <input type="text" id="answer" name="answer" required>
+    <form id="questionForm" action="{{ url_for('question7') }}" method="post">
+        <input type="text" id="answer" name="question7" required>
         <input type="submit" value="Submit">
     </form>
     </div>
 
     <script>
         document.getElementById('questionForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // prevent the form from submitting normally
             let answer = document.getElementById('answer').value;
             localStorage.setItem('question7', answer); // save the answer to local storage
-            window.location.href = 'question8.html'; // redirect to the next question
+            // Form will be submitted to the server, so we don't prevent default or redirect here
         });
     </script>
 </body>

@@ -81,25 +81,25 @@
 <body>
     <div class="container">
     <h1>What sorts of things do you like? Options include:</h1>
-    <form id="questionForm">
+    <form id="questionForm" action="{{ url_for('question6') }}" method="post">
         <ul>
-            <li><input type="checkbox" name="answer" value="Animals"> Animals</li>
-            <li><input type="checkbox" name="answer" value="Architecture"> Architecture</li>
-            <li><input type="checkbox" name="answer" value="Art"> Art</li>
-            <li><input type="checkbox" name="answer" value="Beaches"> Beaches</li>
-            <li><input type="checkbox" name="answer" value="Cruises"> Cruises</li>
-            <li><input type="checkbox" name="answer" value="Family time"> Family time</li>
-            <li><input type="checkbox" name="answer" value="Fine arts"> Fine arts</li>
-            <li><input type="checkbox" name="answer" value="Mountains"> Mountains</li>
-            <li><input type="checkbox" name="answer" value="Museums"> Museums</li>
-            <li><input type="checkbox" name="answer" value="National Parks"> National Parks</li>
-            <li><input type="checkbox" name="answer" value="Parks"> Parks</li>
-            <li><input type="checkbox" name="answer" value="Resorts"> Resorts</li>
-            <li><input type="checkbox" name="answer" value="Shopping"> Shopping</li>
-            <li><input type="checkbox" name="answer" value="Shows"> Shows</li>
-            <li><input type="checkbox" name="answer" value="Sports"> Sports</li>
-            <li><input type="checkbox" name="answer" value="Visual Arts"> Visual Arts</li>
-            <li><input type="checkbox" name="answer" value="Water Sports"> Water Sports</li>
+            <li><input type="checkbox" name="question6" value="Animals"> Animals</li>
+            <li><input type="checkbox" name="question6" value="Architecture"> Architecture</li>
+            <li><input type="checkbox" name="question6" value="Art"> Art</li>
+            <li><input type="checkbox" name="question6" value="Beaches"> Beaches</li>
+            <li><input type="checkbox" name="question6" value="Cruises"> Cruises</li>
+            <li><input type="checkbox" name="question6" value="Family time"> Family time</li>
+            <li><input type="checkbox" name="question6" value="Fine arts"> Fine arts</li>
+            <li><input type="checkbox" name="question6" value="Mountains"> Mountains</li>
+            <li><input type="checkbox" name="question6" value="Museums"> Museums</li>
+            <li><input type="checkbox" name="question6" value="National Parks"> National Parks</li>
+            <li><input type="checkbox" name="question6" value="Parks"> Parks</li>
+            <li><input type="checkbox" name="question6" value="Resorts"> Resorts</li>
+            <li><input type="checkbox" name="question6" value="Shopping"> Shopping</li>
+            <li><input type="checkbox" name="question6" value="Shows"> Shows</li>
+            <li><input type="checkbox" name="question6" value="Sports"> Sports</li>
+             <li><input type="checkbox" name="question6" value="Visual Arts"> Visual Arts</li>
+            <li><input type="checkbox" name="question6" value="Water Sports"> Water Sports</li>
         </ul>
         <input type="submit" value="Submit">
     </form>
@@ -107,16 +107,15 @@
 
     <script>
         document.getElementById('questionForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // prevent the form from submitting normally
+            let checkboxes = document.getElementsByName('question6');
             let answers = [];
-            let checkboxes = document.getElementsByName('answer');
             for (let i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked) {
                     answers.push(checkboxes[i].value);
                 }
             }
             localStorage.setItem('question6', answers.join(',')); // save the answers to local storage
-            window.location.href = 'question7.html'; // redirect to the next question
+            // Form will be submitted to the server, so we don't prevent default or redirect here
         });
     </script>
 </body>

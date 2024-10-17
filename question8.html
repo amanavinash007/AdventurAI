@@ -48,7 +48,7 @@
             flex-direction: column;
         }
 
-        input[type="text"] {
+        input[type="number"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
@@ -77,18 +77,17 @@
 <body>
     <div class="container">
     <h1>What is your age?</h1>
-    <form id="questionForm">
-        <input type="text" id="answer" name="answer" required>
+    <form id="questionForm" action="{{ url_for('question8') }}" method="post">
+        <input type="number" id="answer" name="question8" required min="1" max="120">
         <input type="submit" value="Submit">
     </form>
     </div>
 
     <script>
         document.getElementById('questionForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // prevent the form from submitting normally
             let answer = document.getElementById('answer').value;
             localStorage.setItem('question8', answer); // save the answer to local storage
-            window.location.href = 'result.html'; // redirect to the next question
+            // Form will be submitted to the server, so we don't prevent default or redirect here
         });
     </script>
 </body>

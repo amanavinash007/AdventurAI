@@ -77,18 +77,17 @@
 <body>
     <div class="container">
     <h1>How many days is your trip?</h1>
-    <form id="questionForm">
-        <input type="text" id="answer" name="answer" required>
+    <form id="questionForm" action="{{ url_for('question2') }}" method="post">
+        <input type="text" id="answer" name="question2" required>
         <input type="submit" value="Submit">
     </form>
     </div>
 
     <script>
         document.getElementById('questionForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // prevent the form from submitting normally
             let answer = document.getElementById('answer').value;
             localStorage.setItem('question2', answer); // save the answer to local storage
-            window.location.href = 'question3.html'; // redirect to the next question
+            // Form will be submitted to the server, so we don't prevent default or redirect here
         });
     </script>
 </body>

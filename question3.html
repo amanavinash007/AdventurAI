@@ -85,18 +85,17 @@
         <li>Girls trip</li>
         <li>Guys trip</li>
     </ul>
-<form id="questionForm">
-    <input type="text" id="answer" name="answer" required>
+<form id="questionForm" action="{{ url_for('question3') }}" method="post">
+    <input type="text" id="answer" name="question3" required>
     <input type="submit" value="Submit">
 </form>
 </div>
 
 <script>
     document.getElementById('questionForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // prevent the form from submitting normally
         let answer = document.getElementById('answer').value;
         localStorage.setItem('question3', answer); // save the answer to local storage
-        window.location.href = 'question4.html'; // redirect to the next question
+        // Form will be submitted to the server, so we don't prevent default or redirect here
     });
 </script>
 </body>
