@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from flask_wtf.csrf import CSRFProtect
+from AdventurAI import get_itinerary
 import form_handler
 import json
 from dotenv import load_dotenv
@@ -43,12 +44,19 @@ def process():
     
     answers = [session.get(f'q{i}', '') for i in range(1, 9)]
     try:
-        result = form_handler.handle_form(answers)
-        return jsonify(result)
+        result = get_itinerary(answers)
+        session['itinerary'] = result
+        return render_template('results.html')
     except Exception as e:
         app.logger.error(f"Error processing form: {str(e)}")
-        return jsonify({"error": "An error occurred while processing your request."}), 500
-
+        return render_template('error.html', error="An error occurred while processing your request."), 500
+    
+@app.route('/get_itinerary')
+def get_itinerary_json():
+    if 'itinerary' not in session:
+        return jsonify({"error": "No itinerary found"}), 404
+    return jsonify({"itinerary": session['itinerary']})
+    
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
